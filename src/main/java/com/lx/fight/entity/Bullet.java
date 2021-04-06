@@ -9,4 +9,17 @@ public class Bullet {
     private Direction dir;
 
     private static final Integer SPEED = 5;
+
+    public void move() {
+        switch (dir) {
+            case UP:
+                y -= SPEED;
+            case DOWN:
+                y += SPEED;
+            case LEFT:
+                x -= SPEED;
+            case RIGHT:
+                x += SPEED;
+        }
+    }
 }
