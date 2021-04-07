@@ -90,14 +90,9 @@ public class TankFrame extends Frame {
                     bD = true;
                     setMainTankDir();
                     break;
-
                 default:
                     break;
             }
-
-
-
-//            new Thread(()->new Audio("audio/tank_move.wav").play()).start();
         }
 
         @Override
@@ -135,8 +130,6 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            //save the old dir
-            Direction dir = tank.getDirection();
 
             if (!bL && !bU && !bR && !bD) {
                 tank.setMoving(false);
