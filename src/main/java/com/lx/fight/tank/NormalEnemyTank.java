@@ -15,13 +15,12 @@ public class NormalEnemyTank extends AbsTank {
     private static final Integer SEED = 20;
     private static final Integer SPEED = 2;
 
-    private Boolean living = Boolean.TRUE;
     private Direction direction = Direction.DOWN;
     private TankFrame frame;
 
     private int locationX;
     private int locationY;
-    private int wight;
+    private int width;
     private int height;
 
     public NormalEnemyTank(Integer x, Integer y, TankFrame frame) {
@@ -29,44 +28,35 @@ public class NormalEnemyTank extends AbsTank {
         this.frame = frame;
     }
 
-    public void move() {
-        switch (this.direction) {
-            case UP:
-                super.setY(super.getY() - SPEED);
-                break;
-            case DOWN:
-                super.setY(super.getY() + SPEED);
-                break;
-            case LEFT:
-                super.setX(super.getX() - SPEED);
-                break;
-            case RIGHT:
-                super.setX(super.getX() + SPEED);
-                break;
-            default:
-                break;
-        }
+    @Override
+    protected Direction getDirection() {
+        return this.direction;
+    }
+
+    @Override
+    protected int getSpeed() {
+        return SPEED;
     }
 
     @Override
     public void paint(Graphics g) {
-        if (!this.living) {
+        if (!super.getLiving()) {
             return;
         }
         int random = RandomUtils.getNextInt(SEED);
         this.direction = Direction.values()[random % 4];
         BufferedImage image = ResourceManager.getImage(ResourceCategory.TANK, this.direction);
         g.drawImage(image, super.getX(), super.getY(), null);
-        this.wight = image.getWidth();
+        this.width = image.getWidth();
         this.height = image.getHeight();
 
-        this.move();
+        super.move();
         this.fire();
     }
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(locationX, locationY, this.wight, this.height);
+        return new Rectangle(locationX, locationY, this.width, this.height);
     }
 
     public void fire() {
@@ -98,13 +88,14 @@ public class NormalEnemyTank extends AbsTank {
         frame.addBullet(new SmallBullet(locationX, locationY, this.direction));
     }
 
+
     @Override
-    public void setLiving(boolean living) {
-        this.living = living;
+    protected int getWidth() {
+        return this.width;
     }
 
     @Override
-    public Boolean getLiving() {
-        return this.living;
+    protected int getHeight() {
+        return this.height;
     }
 }

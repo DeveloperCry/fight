@@ -13,11 +13,6 @@ public abstract class AbsBullet extends AbsPaint implements Shape, Lifecycle{
         this.isMain = isMain;
     }
 
-    /**
-     * 子弹移动
-     */
-    public abstract void move();
-
     public boolean isMain() {
         return isMain;
     }

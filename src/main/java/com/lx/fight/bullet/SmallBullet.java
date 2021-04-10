@@ -69,26 +69,20 @@ public class SmallBullet extends AbsBullet {
 
     @Override
     public void move() {
-        switch (direction) {
-            case UP:
-                super.setY(super.getY() - SPEED);
-                break;
-            case DOWN:
-                super.setY(super.getY() + SPEED);
-                break;
-            case LEFT:
-                super.setX(super.getX() - SPEED);
-                break;
-            case RIGHT:
-                super.setX(super.getX() + SPEED);
-                break;
-            default:
-                break;
-        }
-
-        if (super.getX() < 0 || super.getY() < 0 || super.getX() > TankConstants.FRAME_WIGHT || super.getY() > TankConstants.FRAME_HEIGHT) {
+        super.move();
+        if (super.getX() < 0 || super.getY() < 0 || super.getX() > TankConstants.FRAME_WIDTH || super.getY() > TankConstants.FRAME_HEIGHT) {
             this.living = false;
         }
+    }
+
+    @Override
+    protected Direction getDirection() {
+        return this.direction;
+    }
+
+    @Override
+    protected int getSpeed() {
+        return SPEED;
     }
 
     @Override
