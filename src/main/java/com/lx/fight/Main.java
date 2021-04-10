@@ -1,6 +1,6 @@
 package com.lx.fight;
 
-import com.lx.fight.common.TankConstants;
+import com.lx.fight.constant.TankConstants;
 import com.lx.fight.frame.TankFrame;
 
 public class Main {

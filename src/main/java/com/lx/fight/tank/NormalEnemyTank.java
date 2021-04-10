@@ -1,39 +1,40 @@
 package com.lx.fight.tank;
 
 import com.lx.fight.Shape;
+import com.lx.fight.Tank;
 import com.lx.fight.bullet.SmallBullet;
 import com.lx.fight.constant.TankConstants;
 import com.lx.fight.enums.Direction;
 import com.lx.fight.enums.ResourceEnum;
 import com.lx.fight.frame.TankFrame;
 import com.lx.fight.resource.ResourceManager;
+import com.lx.fight.util.RandomUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MainTank implements Shape {
-    private static final Integer SPEED = 10;
+public class NormalEnemyTank implements Tank, Shape {
+    private static final Integer SEED = 20;
+    private static final Integer SPEED = 2;
 
     private Integer x;
     private Integer y;
-    private Boolean moving = Boolean.FALSE;
-    private Direction direction;
+    private Boolean living = Boolean.TRUE;
+    private Direction direction = Direction.DOWN;
     private TankFrame frame;
 
+    private int locationX;
+    private int locationY;
     private int wight;
     private int height;
 
-    public MainTank(Integer x, Integer y, Direction direction, TankFrame frame) {
+    public NormalEnemyTank(Integer x, Integer y, TankFrame frame) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
         this.frame = frame;
     }
 
     public void move() {
-        if (!this.moving) {
-            return;
-        }
         switch (this.direction) {
             case UP:
                 y -= SPEED;
@@ -52,10 +53,13 @@ public class MainTank implements Shape {
         }
     }
 
-//    @Override
+    @Override
     public void paint(Graphics g) {
-//        g.setColor(Color.GREEN);
-//        g.fillRect(this.x, this.y, 10, 20);
+        if (!this.living) {
+            return;
+        }
+        int random = RandomUtils.getNextInt(SEED);
+        this.direction = Direction.values()[random % 4];
         String resourceKey = TankConstants.TANK + TankConstants.UNDERLINE + this.direction;
         BufferedImage image = ResourceManager.images.get(Enum.valueOf(ResourceEnum.class, resourceKey));
         g.drawImage(image, this.x, this.y, null);
@@ -63,13 +67,19 @@ public class MainTank implements Shape {
         this.height = image.getHeight();
 
         this.move();
+        this.fire();
     }
 
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(locationX, locationY, this.wight, this.height);
+    }
 
-//    @Override
     public void fire() {
-        int locationX = this.x;
-        int locationY = this.y;
+        int i = RandomUtils.getNextInt(SEED);
+        if (i % 6 != 0) {
+            return;
+        }
         switch (this.direction) {
             case UP:
                 locationX = this.x + ResourceManager.images.get(ResourceEnum.TANK_UP).getWidth()/2;
@@ -91,30 +101,5 @@ public class MainTank implements Shape {
                 break;
         }
         frame.addBullet(new SmallBullet(locationX, locationY, this.direction));
-    }
-
-    public void changeDirection(boolean bL, boolean bU, boolean bR, boolean bD) {
-        if (!bL && !bU && !bR && !bD) {
-            this.moving = false;
-        } else {
-            if (bL) {
-                this.direction = Direction.LEFT;
-            }
-            if (bU) {
-                this.direction = Direction.UP;
-            }
-            if (bR) {
-                this.direction = Direction.RIGHT;
-            }
-            if (bD) {
-                this.direction = Direction.DOWN;
-            }
-            this.moving = true;
-        }
-    }
-
-    @Override
-    public Rectangle getRectangle() {
-        return new Rectangle(this.x, this.y, this.wight, this.height);
     }
 }

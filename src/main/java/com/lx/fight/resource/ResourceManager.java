@@ -1,6 +1,6 @@
 package com.lx.fight.resource;
 
-import com.lx.fight.common.ResourceUtils;
+import com.lx.fight.util.ResourceUtils;
 import com.lx.fight.enums.ResourceEnum;
 
 import java.awt.image.BufferedImage;

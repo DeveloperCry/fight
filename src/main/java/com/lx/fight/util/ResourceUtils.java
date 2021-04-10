@@ -1,6 +1,5 @@
-package com.lx.fight.common;
+package com.lx.fight.util;
 
-import com.lx.fight.Main;
 import com.lx.fight.enums.ResourceEnum;
 
 import javax.imageio.ImageIO;

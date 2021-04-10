@@ -4,6 +4,7 @@ import com.lx.fight.Bullet;
 import com.lx.fight.Tank;
 import com.lx.fight.tank.MainTank;
 import com.lx.fight.enums.Direction;
+import com.lx.fight.tank.NormalEnemyTank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -48,13 +49,18 @@ public class TankFrame extends Frame {
             }
         });
         super.addKeyListener(new MyKeyListener());
+
+        for (int i = 0; i < 5; i ++) {
+            this.enemies.add(new NormalEnemyTank(100  + i * 100, 100, this));
+        }
     }
 
     @Override
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("bullets:" + bullets.size(), 10, 60);
+        g.drawString("子弹数量:" + bullets.size(), 10, 50);
+        g.drawString("敌方数量:" + enemies.size(), 10, 70);
         g.setColor(c);
         tank.paint(g);
 
