@@ -4,6 +4,7 @@ import com.lx.fight.Shape;
 import com.lx.fight.bullet.SmallBullet;
 import com.lx.fight.constant.TankConstants;
 import com.lx.fight.enums.Direction;
+import com.lx.fight.enums.ResourceCategory;
 import com.lx.fight.enums.ResourceEnum;
 import com.lx.fight.frame.TankFrame;
 import com.lx.fight.resource.ResourceManager;
@@ -52,12 +53,8 @@ public class MainTank implements Shape {
         }
     }
 
-//    @Override
     public void paint(Graphics g) {
-//        g.setColor(Color.GREEN);
-//        g.fillRect(this.x, this.y, 10, 20);
-        String resourceKey = TankConstants.TANK + TankConstants.UNDERLINE + this.direction;
-        BufferedImage image = ResourceManager.images.get(Enum.valueOf(ResourceEnum.class, resourceKey));
+        BufferedImage image = ResourceManager.getImage(ResourceCategory.TANK, this.direction);
         g.drawImage(image, this.x, this.y, null);
         this.wight = image.getWidth();
         this.height = image.getHeight();
@@ -70,22 +67,23 @@ public class MainTank implements Shape {
     public void fire() {
         int locationX = this.x;
         int locationY = this.y;
+        BufferedImage image = ResourceManager.getImage(ResourceCategory.TANK, this.direction);
         switch (this.direction) {
             case UP:
-                locationX = this.x + ResourceManager.images.get(ResourceEnum.TANK_UP).getWidth()/2;
+                locationX = this.x + image.getWidth()/2;
                 locationY = this.y;
                 break;
             case DOWN:
-                locationX = this.x + ResourceManager.images.get(ResourceEnum.TANK_DOWN).getWidth()/2;
-                locationY = this.y + ResourceManager.images.get(ResourceEnum.TANK_DOWN).getHeight();
+                locationX = this.x + image.getWidth()/2;
+                locationY = this.y + image.getHeight();
                 break;
             case RIGHT:
-                locationX = this.x + ResourceManager.images.get(ResourceEnum.TANK_RIGHT).getWidth();
-                locationY = this.y + ResourceManager.images.get(ResourceEnum.TANK_RIGHT).getHeight()/2;
+                locationX = this.x + image.getWidth();
+                locationY = this.y + image.getHeight()/2;
                 break;
             case LEFT:
                 locationX = this.x;
-                locationY = this.y + ResourceManager.images.get(ResourceEnum.TANK_LEFT).getHeight()/2;
+                locationY = this.y + image.getHeight()/2;
                 break;
             default:
                 break;

@@ -4,7 +4,7 @@ import com.lx.fight.Bullet;
 import com.lx.fight.Shape;
 import com.lx.fight.constant.TankConstants;
 import com.lx.fight.enums.Direction;
-import com.lx.fight.enums.ResourceEnum;
+import com.lx.fight.enums.ResourceCategory;
 import com.lx.fight.resource.ResourceManager;
 
 import java.awt.*;
@@ -37,24 +37,21 @@ public class SmallBullet implements Bullet, Shape {
 
     @Override
     public void paint(Graphics g) {
-//        g.setColor(Color.RED);
-//        g.fillRect(this.x, this.y, 5, 5);
         locationX = this.x;
         locationY = this.y;
-        String resourceKey = TankConstants.BULLET + TankConstants.UNDERLINE + this.direction;
-        BufferedImage image = ResourceManager.images.get(Enum.valueOf(ResourceEnum.class, resourceKey));
+        BufferedImage image = ResourceManager.getImage(ResourceCategory.BULLET, this.direction);
         switch (this.direction) {
             case UP:
-                locationX = this.x - ResourceManager.images.get(ResourceEnum.BULLET_UP).getWidth()/2;
+                locationX = this.x - image.getWidth()/2;
                 break;
             case DOWN:
-                locationX = this.x - ResourceManager.images.get(ResourceEnum.BULLET_DOWN).getWidth()/2;
+                locationX = this.x - image.getWidth()/2;
                 break;
             case RIGHT:
-                locationY = this.y - ResourceManager.images.get(ResourceEnum.BULLET_RIGHT).getHeight()/2;
+                locationY = this.y - image.getHeight()/2;
                 break;
             case LEFT:
-                locationY = this.y - ResourceManager.images.get(ResourceEnum.BULLET_LEFT).getHeight()/2;
+                locationY = this.y - image.getHeight()/2;
                 break;
             default:
                 break;

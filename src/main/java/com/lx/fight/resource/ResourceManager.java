@@ -1,5 +1,8 @@
 package com.lx.fight.resource;
 
+import com.lx.fight.constant.TankConstants;
+import com.lx.fight.enums.Direction;
+import com.lx.fight.enums.ResourceCategory;
 import com.lx.fight.util.ResourceUtils;
 import com.lx.fight.enums.ResourceEnum;
 
@@ -20,5 +23,10 @@ public class ResourceManager {
        images.put(ResourceEnum.BULLET_DOWN, ResourceUtils.getImage(ResourceEnum.BULLET_DOWN));
        images.put(ResourceEnum.BULLET_RIGHT, ResourceUtils.getImage(ResourceEnum.BULLET_RIGHT));
        images.put(ResourceEnum.BULLET_LEFT, ResourceUtils.getImage(ResourceEnum.BULLET_LEFT));
+   }
+
+   public static BufferedImage getImage(ResourceCategory category, Direction direction) {
+       String resourceKey = category + TankConstants.UNDERLINE + direction;
+       return images.get(Enum.valueOf(ResourceEnum.class, resourceKey));
    }
 }
