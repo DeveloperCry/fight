@@ -7,12 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * TODO
- *
- * @author xiong.liu
- * @date 2021-4-9 22:30
- */
 public class ResourceManager {
    public static Map<ResourceEnum, BufferedImage> images = new HashMap<>();
 

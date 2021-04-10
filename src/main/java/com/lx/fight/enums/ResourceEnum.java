@@ -1,11 +1,5 @@
 package com.lx.fight.enums;
 
-/**
- * TODO
- *
- * @author xiong.liu
- * @date 2021-4-9 22:14
- */
 public enum ResourceEnum {
     TANK_UP("TANK_UP", "tankU.gif"),
     TANK_DOWN("TANK_DOWN", "tankD.gif"),

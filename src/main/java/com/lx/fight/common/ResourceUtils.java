@@ -7,12 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-/**
- * TODO
- *
- * @author xiong.liu
- * @date 2021-4-9 22:13
- */
 public class ResourceUtils {
 
     public static BufferedImage getImage(ResourceEnum resourceEnum) {
