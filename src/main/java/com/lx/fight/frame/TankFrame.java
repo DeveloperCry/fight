@@ -1,6 +1,8 @@
 package com.lx.fight.frame;
 
-import com.lx.fight.tank.NormalTank;
+import com.lx.fight.Bullet;
+import com.lx.fight.Tank;
+import com.lx.fight.tank.MainTank;
 import com.lx.fight.enums.Direction;
 
 import java.awt.*;
@@ -8,6 +10,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TankFrame extends Frame {
 
@@ -16,7 +21,9 @@ public class TankFrame extends Frame {
     private Integer wight;
     private Integer height;
     private String title;
-    private NormalTank tank = new NormalTank(200, 200, Direction.DOWN);
+    private MainTank tank = new MainTank(200, 200, Direction.UP, this);
+    private List<Bullet> bullets = new ArrayList<>();
+    private List<Tank> enemies = new ArrayList<>();
     Image offScreenImage = null;
 
     public TankFrame(String title, Integer locationX, Integer locationY, Integer wight, Integer height) throws HeadlessException {
@@ -31,6 +38,7 @@ public class TankFrame extends Frame {
         super.setTitle(title);
         super.setSize(wight, height);
         super.setLocation(locationX, locationY);
+        super.setResizable(false);
 
         super.setVisible(true);
         super.addWindowListener(new WindowAdapter() {
@@ -44,8 +52,27 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("bullets:" + bullets.size(), 10, 60);
+        g.setColor(c);
         tank.paint(g);
-        tank.move();
+
+        Iterator<Bullet> iterator = bullets.iterator();
+        while (iterator.hasNext()) {
+            Bullet bullet = iterator.next();
+            if (!bullet.getLiving()) {
+                iterator.remove();
+                continue;
+            }
+            bullet.paint(g);
+        }
+
+        Iterator<Tank> enemiesIterator = enemies.iterator();
+        while (enemiesIterator.hasNext()) {
+            Tank enemy = enemiesIterator.next();
+            enemy.paint(g);
+        }
     }
 
     @Override
@@ -72,82 +99,52 @@ public class TankFrame extends Frame {
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
-
             switch (key) {
                 case KeyEvent.VK_LEFT:
                     bL = true;
-                    setMainTankDir();
                     break;
                 case KeyEvent.VK_UP:
                     bU = true;
-                    setMainTankDir();
                     break;
                 case KeyEvent.VK_RIGHT:
                     bR = true;
-                    setMainTankDir();
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = true;
-                    setMainTankDir();
                     break;
                 default:
                     break;
             }
+            tank.changeDirection(bL, bU, bR, bD);
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
-
             switch (key) {
                 case KeyEvent.VK_LEFT:
                     bL = false;
-                    setMainTankDir();
                     break;
                 case KeyEvent.VK_UP:
                     bU = false;
-                    setMainTankDir();
                     break;
                 case KeyEvent.VK_RIGHT:
                     bR = false;
-                    setMainTankDir();
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = false;
-                    setMainTankDir();
                     break;
-
                 case KeyEvent.VK_CONTROL:
-//                    tank.fire();
+                    tank.fire();
                     break;
-
                 default:
                     break;
             }
-
-            setMainTankDir();
-
+            tank.changeDirection(bL, bU, bR, bD);
         }
+    }
 
-        private void setMainTankDir() {
-
-            if (!bL && !bU && !bR && !bD) {
-                tank.setMoving(false);
-            } else {
-                if (bL) {
-                    tank.setDirection(Direction.LEFT);
-                }
-                if (bU) {
-                    tank.setDirection(Direction.UP);
-                }
-                if (bR) {
-                    tank.setDirection(Direction.RIGHT);
-                }
-                if (bD) {
-                    tank.setDirection(Direction.DOWN);
-                }
-                tank.setMoving(true);
-            }
-        }
+    public void addBullet(Bullet bullet) {
+        this.bullets.add(bullet);
     }
 }
