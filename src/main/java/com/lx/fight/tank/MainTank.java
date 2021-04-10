@@ -2,10 +2,8 @@ package com.lx.fight.tank;
 
 import com.lx.fight.Shape;
 import com.lx.fight.bullet.SmallBullet;
-import com.lx.fight.constant.TankConstants;
 import com.lx.fight.enums.Direction;
 import com.lx.fight.enums.ResourceCategory;
-import com.lx.fight.enums.ResourceEnum;
 import com.lx.fight.frame.TankFrame;
 import com.lx.fight.resource.ResourceManager;
 

@@ -17,4 +17,14 @@ public class ResourceUtils {
         }
         return null;
     }
+
+    public static BufferedImage getImage(String name) {
+        try {
+            BufferedImage image = ImageIO.read(ResourceUtils.class.getClassLoader().getResourceAsStream("images/" + name));
+            return image;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

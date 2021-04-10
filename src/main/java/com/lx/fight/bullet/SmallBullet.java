@@ -1,7 +1,6 @@
 package com.lx.fight.bullet;
 
-import com.lx.fight.Bullet;
-import com.lx.fight.Shape;
+import com.lx.fight.AbsBullet;
 import com.lx.fight.constant.TankConstants;
 import com.lx.fight.enums.Direction;
 import com.lx.fight.enums.ResourceCategory;
@@ -10,11 +9,9 @@ import com.lx.fight.resource.ResourceManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class SmallBullet implements Bullet, Shape {
+public class SmallBullet extends AbsBullet {
     private static final Integer SPEED = 5;
 
-    private Integer x;
-    private Integer y;
     private Direction direction;
     private Boolean living = true;
 
@@ -23,35 +20,38 @@ public class SmallBullet implements Bullet, Shape {
     private int wight;
     private int height;
 
-
     public SmallBullet(Integer x, Integer y, Direction direction) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.direction = direction;
     }
 
     @Override
-    public boolean getLiving() {
+    public void setLiving(boolean living) {
+        this.living = living;
+    }
+
+    @Override
+    public Boolean getLiving() {
         return this.living;
     }
 
     @Override
     public void paint(Graphics g) {
-        locationX = this.x;
-        locationY = this.y;
+        locationX = super.getX();
+        locationY = super.getY();
         BufferedImage image = ResourceManager.getImage(ResourceCategory.BULLET, this.direction);
         switch (this.direction) {
             case UP:
-                locationX = this.x - image.getWidth()/2;
+                locationX = super.getX() - image.getWidth()/2;
                 break;
             case DOWN:
-                locationX = this.x - image.getWidth()/2;
+                locationX = super.getX() - image.getWidth()/2;
                 break;
             case RIGHT:
-                locationY = this.y - image.getHeight()/2;
+                locationY = super.getY() - image.getHeight()/2;
                 break;
             case LEFT:
-                locationY = this.y - image.getHeight()/2;
+                locationY = super.getY() - image.getHeight()/2;
                 break;
             default:
                 break;
@@ -66,22 +66,22 @@ public class SmallBullet implements Bullet, Shape {
     public void move() {
         switch (direction) {
             case UP:
-                y -= SPEED;
+                super.setY(super.getY() - SPEED);
                 break;
             case DOWN:
-                y += SPEED;
+                super.setY(super.getY() + SPEED);
                 break;
             case LEFT:
-                x -= SPEED;
+                super.setX(super.getX() - SPEED);
                 break;
             case RIGHT:
-                x += SPEED;
+                super.setX(super.getX() + SPEED);
                 break;
             default:
                 break;
         }
 
-        if (x < 0 || y < 0 || x > TankConstants.FRAME_WIGHT || y > TankConstants.FRAME_HEIGHT) {
+        if (super.getX() < 0 || super.getY() < 0 || super.getX() > TankConstants.FRAME_WIGHT || super.getY() > TankConstants.FRAME_HEIGHT) {
             this.living = false;
         }
     }

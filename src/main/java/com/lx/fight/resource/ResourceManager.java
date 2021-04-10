@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResourceManager {
-   public static Map<ResourceEnum, BufferedImage> images = new HashMap<>();
+   private static Map<ResourceEnum, BufferedImage> images = new HashMap<>();
 
    static {
        images.put(ResourceEnum.TANK_UP, ResourceUtils.getImage(ResourceEnum.TANK_UP));
