@@ -25,6 +25,11 @@ public class SmallBullet extends AbsBullet {
         this.direction = direction;
     }
 
+    public SmallBullet(Integer x, Integer y, boolean isMain, Direction direction) {
+        super(x, y, isMain);
+        this.direction = direction;
+    }
+
     @Override
     public void setLiving(boolean living) {
         this.living = living;

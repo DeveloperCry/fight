@@ -86,7 +86,7 @@ public class MainTank implements Shape {
             default:
                 break;
         }
-        frame.addBullet(new SmallBullet(locationX, locationY, this.direction));
+        frame.addBullet(new SmallBullet(locationX, locationY, Boolean.TRUE, this.direction));
     }
 
     public void changeDirection(boolean bL, boolean bU, boolean bR, boolean bD) {

@@ -104,7 +104,7 @@ public class TankFrame extends Frame {
                 AbsTank absTank = enemies.get(j);
                 if (absTank.getLiving() && absBullet.getLiving()) {
                     boolean isCollide = absBullet.getRectangle().intersects(absTank.getRectangle());
-                    if (isCollide) {
+                    if (isCollide && absBullet.isMain()) {
                         absBullet.setLiving(false);
                         absTank.setLiving(false);
                         this.explodes.add(new NormalExplode(absTank.getX(), absTank.getY()));
@@ -112,7 +112,6 @@ public class TankFrame extends Frame {
                 }
             }
         }
-//        System.out.println(this.explodes.size());
     }
 
     @Override
