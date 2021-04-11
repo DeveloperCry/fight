@@ -1,11 +1,10 @@
 package com.lx.fight.tank;
 
 import com.lx.fight.AbsTank;
-import com.lx.fight.bullet.SmallBullet;
+import com.lx.fight.bullet.DefaultBullet;
 import com.lx.fight.enums.Direction;
 import com.lx.fight.enums.ResourceCategory;
 import com.lx.fight.frame.TankFrame;
-import com.lx.fight.resource.AudioManager;
 import com.lx.fight.resource.ResourceManager;
 import com.lx.fight.util.RandomUtils;
 
@@ -86,7 +85,7 @@ public class DefaultEnemyTank extends AbsTank {
             default:
                 break;
         }
-        frame.addBullet(new SmallBullet(locationX, locationY, this.direction));
+        frame.addBullet(new DefaultBullet(locationX, locationY, this.direction));
     }
 
 

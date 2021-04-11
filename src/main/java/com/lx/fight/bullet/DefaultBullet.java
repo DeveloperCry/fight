@@ -9,7 +9,7 @@ import com.lx.fight.resource.ResourceManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class SmallBullet extends AbsBullet {
+public class DefaultBullet extends AbsBullet {
     private static final Integer SPEED = 5;
 
     private Direction direction;
@@ -20,12 +20,12 @@ public class SmallBullet extends AbsBullet {
     private int wight;
     private int height;
 
-    public SmallBullet(Integer x, Integer y, Direction direction) {
+    public DefaultBullet(Integer x, Integer y, Direction direction) {
         super(x, y);
         this.direction = direction;
     }
 
-    public SmallBullet(Integer x, Integer y, boolean isMain, Direction direction) {
+    public DefaultBullet(Integer x, Integer y, boolean isMain, Direction direction) {
         super(x, y, isMain);
         this.direction = direction;
     }
@@ -86,7 +86,12 @@ public class SmallBullet extends AbsBullet {
     }
 
     @Override
-    public Rectangle getRectangle() {
-        return new Rectangle(this.locationX, this.locationY, this.wight, this.height);
+    protected int getWidth() {
+        return this.wight;
+    }
+
+    @Override
+    protected int getHeight() {
+        return this.height;
     }
 }

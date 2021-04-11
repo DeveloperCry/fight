@@ -7,6 +7,7 @@ import java.awt.*;
 public abstract class AbsTank extends AbsPaint implements Shape, Lifecycle {
 
     private boolean living = true;
+    private Rectangle rectangle = new Rectangle();
     public AbsTank(Integer x, Integer y) {
         super(x, y);
     }
@@ -54,6 +55,10 @@ public abstract class AbsTank extends AbsPaint implements Shape, Lifecycle {
 
     @Override
     public Rectangle getRectangle() {
-        return new Rectangle(super.getX(), super.getY(), getWidth(), getHeight());
+        rectangle.x = super.getX();
+        rectangle.y = super.getY();
+        rectangle.width = this.getWidth();
+        rectangle.height = this.getHeight();
+        return rectangle;
     }
 }

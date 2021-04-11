@@ -1,7 +1,7 @@
 package com.lx.fight.tank;
 
 import com.lx.fight.AbsTank;
-import com.lx.fight.bullet.SmallBullet;
+import com.lx.fight.bullet.DefaultBullet;
 import com.lx.fight.enums.Direction;
 import com.lx.fight.enums.ResourceCategory;
 import com.lx.fight.frame.TankFrame;
@@ -88,7 +88,7 @@ public class MainTank extends AbsTank {
             default:
                 break;
         }
-        frame.addBullet(new SmallBullet(locationX, locationY, Boolean.TRUE, this.direction));
+        frame.addBullet(new DefaultBullet(locationX, locationY, Boolean.TRUE, this.direction));
         new Thread(()->new AudioManager("tank_fire.wav").play()).start();
     }
 
