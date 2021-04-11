@@ -5,6 +5,7 @@ import com.lx.fight.bullet.SmallBullet;
 import com.lx.fight.enums.Direction;
 import com.lx.fight.enums.ResourceCategory;
 import com.lx.fight.frame.TankFrame;
+import com.lx.fight.resource.AudioManager;
 import com.lx.fight.resource.ResourceManager;
 
 import java.awt.*;
@@ -56,7 +57,7 @@ public class MainTank extends AbsTank {
 
     @Override
     public void paint(Graphics g) {
-        BufferedImage image = ResourceManager.getImage(ResourceCategory.TANK, this.direction);
+        BufferedImage image = ResourceManager.getImage(ResourceCategory.MAIN_TANK, this.direction);
         g.drawImage(image, super.getX(), super.getY(), null);
         this.width = image.getWidth();
         this.height = image.getHeight();
@@ -68,7 +69,7 @@ public class MainTank extends AbsTank {
     public void fire() {
         int locationX = super.getX();
         int locationY = super.getY();
-        BufferedImage image = ResourceManager.getImage(ResourceCategory.TANK, this.direction);
+        BufferedImage image = ResourceManager.getImage(ResourceCategory.MAIN_TANK, this.direction);
         switch (this.direction) {
             case UP:
                 locationX = super.getX() + image.getWidth()/2;
@@ -88,6 +89,7 @@ public class MainTank extends AbsTank {
                 break;
         }
         frame.addBullet(new SmallBullet(locationX, locationY, Boolean.TRUE, this.direction));
+        new Thread(()->new AudioManager("tank_fire.wav").play()).start();
     }
 
     public void changeDirection(boolean bL, boolean bU, boolean bR, boolean bD) {

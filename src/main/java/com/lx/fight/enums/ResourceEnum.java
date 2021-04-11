@@ -1,26 +1,20 @@
 package com.lx.fight.enums;
 
 public enum ResourceEnum {
-    TANK_UP("TANK_UP", "tankU.gif"),
-    TANK_DOWN("TANK_DOWN", "tankD.gif"),
-    TANK_RIGHT("TANK_RIGHT", "tankR.gif"),
-    TANK_LEFT("TANK_LEFT", "tankL.gif"),
+    MAIN_TANK_UP,
+    MAIN_TANK_DOWN,
+    MAIN_TANK_RIGHT,
+    MAIN_TANK_LEFT,
 
-    BULLET_UP("BULLET_UP", "bulletU.gif"),
-    BULLET_DOWN("BULLET_DOWN", "bulletD.gif"),
-    BULLET_RIGHT("BULLET_RIGHT", "bulletR.gif"),
-    BULLET_LEFT("BULLET_LEFT", "bulletL.gif"),
+    DEFAULT_ENEMY_TANK_UP,
+    DEFAULT_ENEMY_TANK_DOWN,
+    DEFAULT_ENEMY_TANK_RIGHT,
+    DEFAULT_ENEMY_TANK_LEFT,
+
+    BULLET_UP,
+    BULLET_DOWN,
+    BULLET_RIGHT,
+    BULLET_LEFT,
     ;
 
-    private String label;
-    private String img;
-
-    ResourceEnum(String label, String img) {
-        this.label = label;
-        this.img = img;
-    }
-
-    public String getImg() {
-        return img;
-    }
 }

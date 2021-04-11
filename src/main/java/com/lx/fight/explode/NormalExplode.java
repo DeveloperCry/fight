@@ -2,6 +2,7 @@ package com.lx.fight.explode;
 
 import com.lx.fight.AbsExplode;
 import com.lx.fight.constant.ExplodeConstants;
+import com.lx.fight.resource.AudioManager;
 import com.lx.fight.resource.ExplodeManager;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ public class NormalExplode extends AbsExplode {
 
     public NormalExplode(int x, int y) {
         super(x, y);
+        new Thread(()->new AudioManager("explode.wav").play()).start();
     }
 
     @Override

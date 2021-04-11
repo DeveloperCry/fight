@@ -15,7 +15,7 @@ public abstract class AbsTank extends AbsPaint implements Shape, Lifecycle {
     protected void move() {
         switch (getDirection()) {
             case UP:
-                if (super.getY() > 0) {
+                if (super.getY() > TankConstants.FRAME_MENU_HEIGHT) {
                     super.setY(super.getY() - getSpeed());
                 }
                 break;

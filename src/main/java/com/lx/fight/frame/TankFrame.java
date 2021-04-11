@@ -6,7 +6,7 @@ import com.lx.fight.AbsTank;
 import com.lx.fight.explode.NormalExplode;
 import com.lx.fight.tank.MainTank;
 import com.lx.fight.enums.Direction;
-import com.lx.fight.tank.NormalEnemyTank;
+import com.lx.fight.tank.DefaultEnemyTank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -54,7 +54,7 @@ public class TankFrame extends Frame {
         super.addKeyListener(new MyKeyListener());
 
         for (int i = 0; i < 5; i ++) {
-            this.enemies.add(new NormalEnemyTank(100  + i * 100, 100, this));
+            this.enemies.add(new DefaultEnemyTank(100  + i * 100, 100, this));
         }
     }
 

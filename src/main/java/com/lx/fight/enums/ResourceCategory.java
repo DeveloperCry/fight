@@ -1,7 +1,8 @@
 package com.lx.fight.enums;
 
 public enum ResourceCategory {
-    TANK,
+    MAIN_TANK,
+    DEFAULT_ENEMY_TANK,
     BULLET,
     ;
 }
